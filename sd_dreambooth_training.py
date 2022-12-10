@@ -402,7 +402,8 @@ def training_function(text_encoder, vae, unet):
     # For mixed precision training we cast the text_encoder and vae weights to half-precision
     # as these models are only used for inference, keeping weights in full precision is not required.
     vae.to(accelerator.device, dtype=weight_dtype)
-    vae.decoder.to("cpu")
+    print(f"Accelerator device: {accelerator.device}")
+    vae.decoder.to("cuda")
     if not args.train_text_encoder:
         text_encoder.to(accelerator.device, dtype=weight_dtype)
     
