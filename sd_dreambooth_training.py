@@ -518,7 +518,8 @@ def training_function(text_encoder, vae, unet):
         pipeline.save_pretrained(args.output_dir)
 
 #@title Run training
-training_function(text_encoder, vae, unet)
+import accelerate
+accelerate.notebook_launcher(training_function, args=(text_encoder, vae, unet))
 for param in itertools.chain(unet.parameters(), text_encoder.parameters()):
   if param.grad is not None:
     del param.grad  # free some memory
