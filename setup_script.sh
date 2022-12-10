@@ -5,13 +5,23 @@ sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/r
 sudo apt update &&
 sudo apt install cuda=11.3.1-1
 
+find / -name libcuda.so 2>/dev/null
+
 sudo apt install python3-pip &&
 sudo apt install python-is-python3
 
-pip install -U -qq git+https://github.com/huggingface/diffusers.git &&
-pip install -U -qq accelerate tensorboard transformers ftfy &&
-pip install -U -qq "ipywidgets>=7,<8" &&
-pip install -qq bitsandbytes &&
+conda install -y -c pytorch -c conda-forge cudatoolkit=11.3 pytorch torchvision torchaudio
+
+pip install -U git+https://github.com/huggingface/diffusers.git &&
+pip install accelerate tensorboard transformers ftfy &&
+pip install "ipywidgets>=7,<8" &&
+pip install bitsandbytes &&
 pip install -U --pre triton &&
 pip install -q https://github.com/TheLastBen/fast-stable-diffusion/raw/main/precompiled/A100/xformers-0.0.13.dev0-py3-none-any.whl &&
 pip install torchvision
+
+git clone https://github.com/pschinis/dreambooth-setup.git &&
+cd dreambooth-setup &&
+python sd_dreambooth_training.py
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.3/targets/x86_64-linux/lib/stubs/libcuda.so
