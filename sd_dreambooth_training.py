@@ -520,7 +520,7 @@ def training_function(text_encoder, vae, unet):
 
 #@title Run training
 import accelerate
-accelerate.notebook_launcher(training_function, args=(text_encoder, vae, unet))
+training_function(text_encoder, vae, unet)
 for param in itertools.chain(unet.parameters(), text_encoder.parameters()):
   if param.grad is not None:
     del param.grad  # free some memory
