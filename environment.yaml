@@ -9,8 +9,8 @@ dependencies:
   - numpy=1.22.3
   - cudatoolkit=11.3
   - pip:
-    - torch
-    - torchvision
+    - torch==1.12.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
+    - torchvision==0.13.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
     - diffusers
     - accelerate
     - tensorboard
