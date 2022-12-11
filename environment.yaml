@@ -1,0 +1,19 @@
+name: dbt
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.8.10
+  - pip=20.3
+  - cudatoolkit=11.3
+  - pytorch=1.10.2
+  - torchvision=0.11.3
+  - numpy=1.22.3
+  - pip:
+    - diffusers
+    - accelerate
+    - tensorboard
+    - transformers
+    - ftfy
+    - triton
+    - https://github.com/TheLastBen/fast-stable-diffusion/raw/main/precompiled/A100/xformers-0.0.13.dev0-py3-none-any.whl

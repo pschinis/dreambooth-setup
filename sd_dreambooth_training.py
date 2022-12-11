@@ -45,8 +45,6 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
-import bitsandbytes as bnb
-
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
 
@@ -320,11 +318,8 @@ def training_function(text_encoder, vae, unet):
         if args.train_text_encoder:
             text_encoder.gradient_checkpointing_enable()
 
-    # Use 8-bit Adam for lower memory usage or to fine-tune the model in 16GB GPUs
-    if args.use_8bit_adam:
-        optimizer_class = bnb.optim.AdamW8bit
-    else:
-        optimizer_class = torch.optim.AdamW
+    # TODO Use 8-bit Adam for lower memory usage or to fine-tune the model in 16GB GPUs
+    optimizer_class = torch.optim.AdamW
     
     params_to_optimize = (
         itertools.chain(unet.parameters(), text_encoder.parameters()) if args.train_text_encoder else unet.parameters()
