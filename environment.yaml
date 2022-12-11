@@ -7,6 +7,7 @@ dependencies:
   - python=3.8.10
   - pip=20.3
   - numpy=1.22.3
+  - cudatoolkit=11.3
   - pip:
     - torch
     - torchvision
