@@ -28,3 +28,11 @@ cd dreambooth-setup &&
 python sd_dreambooth_training.py
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.3/targets/x86_64-linux/lib/stubs/libcuda.so
+
+
+Setup to get mismatched types error:
+1) Plain Ubuntu VM
+2) Sudo install python
+3) Install Cuda with Google script
+4) Pip install up to ipywidgets + torchvision
+5) Run script without unet to cuda or bitsandbytes
