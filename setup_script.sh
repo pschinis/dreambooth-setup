@@ -25,6 +25,7 @@ pip install torchvision
 
 git clone https://github.com/pschinis/dreambooth-setup.git &&
 cd dreambooth-setup &&
+conda env create -f environment.yaml && conda activate dbt &&
 python sd_dreambooth_training.py
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.3/targets/x86_64-linux/lib/stubs/libcuda.so
