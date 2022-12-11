@@ -8,7 +8,7 @@ dependencies:
   - pip=20.3
   - numpy=1.22.3
   - pip:
-    - pytorch
+    - torch
     - torchvision
     - diffusers
     - accelerate
