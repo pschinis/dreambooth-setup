@@ -6,11 +6,10 @@ channels:
 dependencies:
   - python=3.8.10
   - pip=20.3
-  - pytorch=1.10.2
-  - cudatoolkit=11.0.3
-  - torchvision=0.11.3
   - numpy=1.22.3
   - pip:
+    - pytorch=1.10.2
+    - torchvision=0.11.3
     - diffusers
     - accelerate
     - tensorboard
