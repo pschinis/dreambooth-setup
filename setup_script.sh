@@ -7,6 +7,9 @@ sudo apt install cuda=11.3.1-1
 
 find / -name libcuda.so 2>/dev/null
 
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
 sudo apt install python3-pip &&
 sudo apt install python-is-python3
 
