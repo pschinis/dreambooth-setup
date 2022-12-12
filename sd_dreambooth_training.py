@@ -123,7 +123,9 @@ Execute this this sequence of cells to run the training process. The whole proce
 #@title Setup the Classes
 from pathlib import Path
 from torchvision import transforms
+import time
 
+start_time = time.time()
 class DreamBoothDataset(Dataset):
     def __init__(
         self,
@@ -526,6 +528,9 @@ for param in itertools.chain(unet.parameters(), text_encoder.parameters()):
     del param.grad  # free some memory
   torch.cuda.empty_cache()
 
+training_end = time.time()
+print(f'Training took {training_end - start_time}s')
+
 
 
 """## Run the code with your newly trained model
@@ -561,3 +566,5 @@ images = inference("a <cat-toy> in mad max fury road",2)
 if not os.path.exists(results_path):
   os.mkdir(results_path)
 [image.save(f"{results_path}/{i}.jpeg") for i, image in enumerate(images)]
+
+print(f'Inference took {time.time() - training_end}s')
