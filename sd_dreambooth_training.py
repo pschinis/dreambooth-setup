@@ -93,10 +93,10 @@ if not os.path.exists(save_path):
 
 #@title Settings for your newly created concept
 #@markdown `instance_prompt` is a prompt that should contain a good description of what your object or style is, together with the initializer word `cat_toy`  
-instance_prompt = "<cat-toy> toy" #@param {type:"string"}
+instance_prompt = "zwx cat figurine" #@param {type:"string"}
 #@markdown Check the `prior_preservation` option if you would like class of the concept (e.g.: toy, dog, painting) is guaranteed to be preserved. This increases the quality and helps with generalization at the cost of training time
 prior_preservation = False #@param {type:"boolean"}
-prior_preservation_class_prompt = "a photo of a cat clay toy" #@param {type:"string"}
+prior_preservation_class_prompt = "a photo of a cat figurine" #@param {type:"string"}
 
 num_class_images = 200 
 sample_batch_size = 2
@@ -558,7 +558,7 @@ def inference(prompt, num_samples):
     return all_images
 
 results_path = './results'
-images = inference("a <cat-toy> in mad max fury road",2)
+images = inference("a zwx cat figurine in mad max fury road",2)
 if not os.path.exists(results_path):
   os.mkdir(results_path)
 [image.save(f"{results_path}/{i}.jpeg") for i, image in enumerate(images)]
