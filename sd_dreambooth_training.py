@@ -399,6 +399,7 @@ def training_function(text_encoder, vae, unet):
     # as these models are only used for inference, keeping weights in full precision is not required.
     vae.to(accelerator.device, dtype=weight_dtype)
     print(f"Accelerator device: {accelerator.device}")
+    print(f"Accelerator weight dtype: {weight_dtype}")
     vae.decoder.to("cuda")
     #unet.to("cuda")
     if not args.train_text_encoder:
