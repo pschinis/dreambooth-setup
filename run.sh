@@ -1,4 +1,4 @@
-accelerate launch train_dreambooth.py \
+accelerate launch run.py \
   --pretrained_model_name_or_path="stabilityai/stable-diffusion-2-1"  \
   --instance_data_dir="./inputs" \
   --output_dir="./dbmodel" \
