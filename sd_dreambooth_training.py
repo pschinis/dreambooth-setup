@@ -389,19 +389,19 @@ def training_function(text_encoder, vae, unet):
         )
 
     weight_dtype = torch.float32
-    if accelerator.mixed_precision == "fp16":
-        weight_dtype = torch.float16
-    elif accelerator.mixed_precision == "bf16":
-        weight_dtype = torch.bfloat16
+    #if accelerator.mixed_precision == "fp16":
+     #   weight_dtype = torch.float16
+    #elif accelerator.mixed_precision == "bf16":
+    #    weight_dtype = torch.bfloat16
     
     # Move text_encode and vae to gpu.
     # For mixed precision training we cast the text_encoder and vae weights to half-precision
     # as these models are only used for inference, keeping weights in full precision is not required.
-    vae.to(accelerator.device, torch.float32)
+    vae.to(accelerator.device, dtype=weight_dtype)
     print(f"Accelerator device: {accelerator.device}")
     print(f"Accelerator weight dtype: {weight_dtype}")
-    vae.decoder.to(accelerator.device, torch.float32)
-    unet.to(accelerator.device)
+    vae.decoder.to(accelerator.device, dtype=weight_dtype)
+    unet.to(accelerator.device, dtype=weight_dtype)
     if not args.train_text_encoder:
         text_encoder.to(accelerator.device, dtype=weight_dtype)
     
