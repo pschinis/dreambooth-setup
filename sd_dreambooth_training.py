@@ -388,7 +388,7 @@ def training_function(text_encoder, vae, unet):
             unet, optimizer, train_dataloader, lr_scheduler
         )
 
-    weight_dtype = torch.float32
+    weight_dtype = torch.float16
     #if accelerator.mixed_precision == "fp16":
      #   weight_dtype = torch.float16
     #elif accelerator.mixed_precision == "bf16":
