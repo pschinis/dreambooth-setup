@@ -38,5 +38,5 @@ Setup to get mismatched types error:
 4) Pip install up to ipywidgets + torchvision
 5) Run script without unet to cuda or bitsandbytes
 
-With full precision: 15:30
+With full precision, no bits and bites, triton error: 15:30
 With miced 

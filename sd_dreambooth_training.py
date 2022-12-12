@@ -44,7 +44,8 @@ from PIL import Image
 from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
-from  torch.cuda.amp import autocast
+from torch.cuda.amp import autocast
+
 
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
@@ -446,7 +447,8 @@ def training_function(text_encoder, vae, unet):
                 encoder_hidden_states = text_encoder(batch["input_ids"])[0]
 
                 # Predict the noise residual
-                noise_pred = unet(noisy_latents, timesteps, encoder_hidden_states).sample
+                with autocast():
+                    noise_pred = unet(noisy_latents, timesteps, encoder_hidden_states).sample
 
                 # Get the target for loss depending on the prediction type
                 if noise_scheduler.config.prediction_type == "epsilon":
