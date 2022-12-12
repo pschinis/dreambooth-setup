@@ -37,3 +37,6 @@ Setup to get mismatched types error:
 3) Install Cuda with Google script
 4) Pip install up to ipywidgets + torchvision
 5) Run script without unet to cuda or bitsandbytes
+
+With full precision: 15:30
+With miced 
