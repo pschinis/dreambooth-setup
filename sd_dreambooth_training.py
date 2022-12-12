@@ -44,6 +44,7 @@ from PIL import Image
 from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
+from  torch.cuda.amp import autocast
 
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
@@ -399,7 +400,7 @@ def training_function(text_encoder, vae, unet):
     vae.to(accelerator.device, dtype=weight_dtype)
     print(f"Accelerator device: {accelerator.device}")
     vae.decoder.to("cuda")
-    unet.to("cuda")
+    #unet.to("cuda")
     if not args.train_text_encoder:
         text_encoder.to(accelerator.device, dtype=weight_dtype)
     

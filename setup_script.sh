@@ -29,7 +29,7 @@ conda env create -f environment.yaml && conda activate dbt &&
 python sd_dreambooth_training.py
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.3/targets/x86_64-linux/lib/stubs/libcuda.so
-pip3 install torch==1.12.0+cu113 torchvision==0.13.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
+pip3 install torch==1.12.0+cu113 torchvision==0.13.0+cu113 -f https://download.pytorch.org/whl/torch_stable.htmlcd dreambooth
 
 Setup to get mismatched types error:
 1) Plain Ubuntu VM
