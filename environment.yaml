@@ -18,4 +18,5 @@ dependencies:
     - transformers
     - ftfy
     - triton
+    - modelcards
     - https://github.com/TheLastBen/fast-stable-diffusion/raw/main/precompiled/A100/xformers-0.0.13.dev0-py3-none-any.whl

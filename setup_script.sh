@@ -39,4 +39,4 @@ Setup to get mismatched types error:
 5) Run script without unet to cuda or bitsandbytes
 
 With full precision, no bits and bites, triton error: 15:30
-With miced 
+With half precision: 9:00
