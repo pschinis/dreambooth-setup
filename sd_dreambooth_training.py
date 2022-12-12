@@ -397,7 +397,7 @@ def training_function(text_encoder, vae, unet):
     # Move text_encode and vae to gpu.
     # For mixed precision training we cast the text_encoder and vae weights to half-precision
     # as these models are only used for inference, keeping weights in full precision is not required.
-    vae.to(accelerator.device, dtype=weight_dtype)
+    vae.to(accelerator.device, torch.float32)
     print(f"Accelerator device: {accelerator.device}")
     print(f"Accelerator weight dtype: {weight_dtype}")
     vae.decoder.to(accelerator.device, dtype=weight_dtype)
