@@ -401,7 +401,7 @@ def training_function(text_encoder, vae, unet):
     print(f"Accelerator device: {accelerator.device}")
     print(f"Accelerator weight dtype: {weight_dtype}")
     vae.decoder.to("cuda")
-    #unet.to("cuda")
+    unet.to(accelerator.device, dtype=weight_dtype)
     if not args.train_text_encoder:
         text_encoder.to(accelerator.device, dtype=weight_dtype)
     
