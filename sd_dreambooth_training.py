@@ -62,7 +62,7 @@ def image_grid(imgs, rows, cols):
 """## Settings for teaching your new concept"""
 
 #@markdown `pretrained_model_name_or_path` which Stable Diffusion checkpoint you want to use
-pretrained_model_name_or_path = "stabilityai/stable-diffusion-2" #@param ["stabilityai/stable-diffusion-2", "stabilityai/stable-diffusion-2-base", "CompVis/stable-diffusion-v1-4", "runwayml/stable-diffusion-v1-5"] {allow-input: true}
+pretrained_model_name_or_path = "stabilityai/stable-diffusion-2-1" #@param ["stabilityai/stable-diffusion-2", "stabilityai/stable-diffusion-2-base", "CompVis/stable-diffusion-v1-4", "runwayml/stable-diffusion-v1-5"] {allow-input: true}
 
 #@markdown Add here the URLs to the images of the concept you are adding. 3-5 should be fine
 urls = [
@@ -98,24 +98,12 @@ instance_prompt = "<cat-toy> toy" #@param {type:"string"}
 prior_preservation = False #@param {type:"boolean"}
 prior_preservation_class_prompt = "a photo of a cat clay toy" #@param {type:"string"}
 
-num_class_images = 12 
+num_class_images = 200 
 sample_batch_size = 2
-prior_loss_weight = 0.5
+prior_loss_weight = 1
 prior_preservation_class_folder = "./class_images"
 class_data_root=prior_preservation_class_folder
 class_prompt=prior_preservation_class_prompt
-
-"""#### Advanced settings for prior preservation (optional)"""
-
-num_class_images = 12 #@param {type: "number"}
-sample_batch_size = 2
-#@markdown `prior_preservation_weight` determins how strong the class for prior preservation should be 
-prior_loss_weight = 1 #@param {type: "number"}
-
-
-#@markdown If the `prior_preservation_class_folder` is empty, images for the class will be generated with the class prompt. Otherwise, fill this folder with images of items on the same class as your concept (but not images of the concept itself)
-prior_preservation_class_folder = "./class_images" #@param {type:"string"}
-class_data_root=prior_preservation_class_folder
 
 """## Teach the model the new concept (fine-tuning with Dreambooth)
 Execute this this sequence of cells to run the training process. The whole process may take from 15 min to 2 hours. (Open this block if you are interested in how this process works under the hood or if you want to change advanced training settings or hyperparameters)
@@ -269,7 +257,7 @@ args = Namespace(
     pretrained_model_name_or_path=pretrained_model_name_or_path,
     resolution=vae.sample_size,
     center_crop=True,
-    train_text_encoder=False,
+    train_text_encoder=True,
     instance_data_dir=save_path,
     instance_prompt=instance_prompt,
     learning_rate=5e-06,
