@@ -62,7 +62,7 @@ def image_grid(imgs, rows, cols):
 """## Settings for teaching your new concept"""
 
 #@markdown `pretrained_model_name_or_path` which Stable Diffusion checkpoint you want to use
-pretrained_model_name_or_path = "stabilityai/stable-diffusion-2-1" #@param ["stabilityai/stable-diffusion-2", "stabilityai/stable-diffusion-2-base", "CompVis/stable-diffusion-v1-4", "runwayml/stable-diffusion-v1-5"] {allow-input: true}
+pretrained_model_name_or_path = "stabilityai/stable-diffusion-2" #@param ["stabilityai/stable-diffusion-2", "stabilityai/stable-diffusion-2-base", "CompVis/stable-diffusion-v1-4", "runwayml/stable-diffusion-v1-5"] {allow-input: true}
 
 #@markdown Add here the URLs to the images of the concept you are adding. 3-5 should be fine
 urls = [
