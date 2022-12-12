@@ -26,6 +26,7 @@ import math
 import os
 from contextlib import nullcontext
 import random
+import inspect
 
 import numpy as np
 import torch
@@ -449,8 +450,7 @@ def training_function(text_encoder, vae, unet):
                 encoder_hidden_states = text_encoder(batch["input_ids"])[0]
 
                 # Predict the noise residual
-                with autocast():
-                    noise_pred = unet(noisy_latents, timesteps, encoder_hidden_states).sample
+                noise_pred = unet(noisy_latents, timesteps, encoder_hidden_states).sample
 
                 # Get the target for loss depending on the prediction type
                 if noise_scheduler.config.prediction_type == "epsilon":
@@ -495,10 +495,18 @@ def training_function(text_encoder, vae, unet):
 
                 if global_step % args.save_steps == 0:
                     if accelerator.is_main_process:
+                        # newer versions of accelerate allow the 'keep_fp32_wrapper' arg. without passing
+                        # it, the models will be unwrapped, and when they are then used for further training,
+                        # we will crash. pass this, but only to newer versions of accelerate. fixes
+                        # https://github.com/huggingface/diffusers/issues/1566
+                        accepts_keep_fp32_wrapper = "keep_fp32_wrapper" in set(
+                            inspect.signature(accelerator.unwrap_model).parameters.keys()
+                        )
+                        extra_args = {"keep_fp32_wrapper": True} if accepts_keep_fp32_wrapper else {}
                         pipeline = StableDiffusionPipeline.from_pretrained(
                             args.pretrained_model_name_or_path,
-                            unet=accelerator.unwrap_model(unet),
-                            text_encoder=accelerator.unwrap_model(text_encoder),
+                            unet=accelerator.unwrap_model(unet, **extra_args),
+                            text_encoder=accelerator.unwrap_model(text_encoder, **extra_args)
                         )
                         save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
                         pipeline.save_pretrained(save_path)

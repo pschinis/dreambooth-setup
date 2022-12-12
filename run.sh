@@ -10,5 +10,3 @@ accelerate launch run.py \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
   --max_train_steps=300 \
-  --with_prior_preservation --prior_loss_weight=1.0 \
-  --num_class_images=200
