@@ -400,7 +400,7 @@ def training_function(text_encoder, vae, unet):
     vae.to(accelerator.device, torch.float32)
     print(f"Accelerator device: {accelerator.device}")
     print(f"Accelerator weight dtype: {weight_dtype}")
-    vae.decoder.to(accelerator.device, dtype=weight_dtype)
+    vae.decoder.to(accelerator.device, torch.float32)
     unet.to(accelerator.device)
     if not args.train_text_encoder:
         text_encoder.to(accelerator.device, dtype=weight_dtype)
