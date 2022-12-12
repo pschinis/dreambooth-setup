@@ -1,6 +1,6 @@
 accelerate launch train_dreambooth.py \
   --pretrained_model_name_or_path="stabilityai/stable-diffusion-2-1"  \
-  --instance_data_dir="./inputs \
+  --instance_data_dir="./inputs" \
   --output_dir="./dbmodel" \
   --instance_prompt="<cat-toy> toy" \
   --resolution=768 \
