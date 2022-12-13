@@ -24,7 +24,7 @@ args = parse_args()
 pipe = StableDiffusionPipeline.from_pretrained(
         args.model_dir,
         scheduler = DPMSolverMultistepScheduler.from_pretrained(args.model_dir, subfolder="scheduler"),
-        torch_dtype=torch.float16,
+        torch_dtype=torch.float32,
     ).to("cuda")
 
 #@title Run the Stable Diffusion pipeline with interactive UI Demo on Gradio
