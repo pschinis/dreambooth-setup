@@ -68,10 +68,10 @@ pretrained_model_name_or_path = "stabilityai/stable-diffusion-2" #@param ["stabi
 
 #@title Settings for your newly created concept
 #@markdown `instance_prompt` is a prompt that should contain a good description of what your object or style is, together with the initializer word `cat_toy`  
-instance_prompt = "a zwx cat" #@param {type:"string"}
+instance_prompt = "a photo of sks dog" #@param {type:"string"}
 #@markdown Check the `prior_preservation` option if you would like class of the concept (e.g.: toy, dog, painting) is guaranteed to be preserved. This increases the quality and helps with generalization at the cost of training time
-prior_preservation = True #@param {type:"boolean"}
-prior_preservation_class_prompt = "a cat" #@param {type:"string"}
+prior_preservation = False #@param {type:"boolean"}
+prior_preservation_class_prompt = "a photo of dog" #@param {type:"string"}
 
 num_class_images = 250 
 sample_batch_size = 2
@@ -232,7 +232,7 @@ args = Namespace(
     pretrained_model_name_or_path=pretrained_model_name_or_path,
     resolution=vae.sample_size,
     center_crop=True,
-    train_text_encoder=True,
+    train_text_encoder=False,
     instance_data_dir='./inputs',
     instance_prompt=instance_prompt,
     learning_rate=5e-06,
@@ -533,7 +533,7 @@ def inference(prompt, num_samples):
     return all_images
 
 results_path = './results'
-images = inference("a zwx cat in mad max fury road",2)
+images = inference("a photo of sks dog in a bucket",2)
 if not os.path.exists(results_path):
   os.mkdir(results_path)
 [image.save(f"{results_path}/{i}.jpeg") for i, image in enumerate(images)]
