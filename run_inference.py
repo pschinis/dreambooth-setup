@@ -9,6 +9,7 @@ def parse_args(input_args=None):
     parser = argparse.ArgumentParser(description="Simple example of a training script.")
     parser.add_argument("--model_dir", type=str, default='./dreambooth_model')
     parser.add_argument("--prompt", type=str, default='a zwx cat in mad max fury road')
+    parser.add_argument("--steps", type=int, default=25)
 
     if input_args is not None:
         args = parser.parse_args(input_args)
@@ -33,7 +34,7 @@ pipe = StableDiffusionPipeline.from_pretrained(
 
 def inference(prompt, num_samples):
     all_images = [] 
-    images = pipe(prompt, num_images_per_prompt=num_samples, num_inference_steps=25).images
+    images = pipe(prompt, num_images_per_prompt=num_samples, num_inference_steps=args.steps).images
     all_images.extend(images)
     return all_images
 
