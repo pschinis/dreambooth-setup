@@ -65,40 +65,15 @@ def image_grid(imgs, rows, cols):
 pretrained_model_name_or_path = "stabilityai/stable-diffusion-2" #@param ["stabilityai/stable-diffusion-2", "stabilityai/stable-diffusion-2-base", "CompVis/stable-diffusion-v1-4", "runwayml/stable-diffusion-v1-5"] {allow-input: true}
 
 #@markdown Add here the URLs to the images of the concept you are adding. 3-5 should be fine
-urls = [
-      "https://huggingface.co/datasets/valhalla/images/resolve/main/2.jpeg",
-      "https://huggingface.co/datasets/valhalla/images/resolve/main/3.jpeg",
-      "https://huggingface.co/datasets/valhalla/images/resolve/main/5.jpeg",
-      "https://huggingface.co/datasets/valhalla/images/resolve/main/6.jpeg",
-      ## You can add additional images here
-      ]
-
-#@title Setup and check the images you have just added
-import requests
-import glob
-from io import BytesIO
-
-def download_image(url):
-  try:
-    response = requests.get(url)
-  except:
-    return None
-  return Image.open(BytesIO(response.content)).convert("RGB")
-
-images = list(filter(None,[download_image(url) for url in urls]))
-save_path = "./inputs"
-if not os.path.exists(save_path):
-  os.mkdir(save_path)
-[image.save(f"{save_path}/{i}.jpeg") for i, image in enumerate(images)]
 
 #@title Settings for your newly created concept
 #@markdown `instance_prompt` is a prompt that should contain a good description of what your object or style is, together with the initializer word `cat_toy`  
-instance_prompt = "zwx cat figurine" #@param {type:"string"}
+instance_prompt = "a zwx cat" #@param {type:"string"}
 #@markdown Check the `prior_preservation` option if you would like class of the concept (e.g.: toy, dog, painting) is guaranteed to be preserved. This increases the quality and helps with generalization at the cost of training time
 prior_preservation = False #@param {type:"boolean"}
-prior_preservation_class_prompt = "a photo of a cat figurine" #@param {type:"string"}
+prior_preservation_class_prompt = "a cat" #@param {type:"string"}
 
-num_class_images = 200 
+num_class_images = 250 
 sample_batch_size = 2
 prior_loss_weight = 1
 prior_preservation_class_folder = "./class_images"
@@ -558,7 +533,7 @@ def inference(prompt, num_samples):
     return all_images
 
 results_path = './results'
-images = inference("a zwx cat figurine in mad max fury road",2)
+images = inference("a zwx cat in mad max fury road",2)
 if not os.path.exists(results_path):
   os.mkdir(results_path)
 [image.save(f"{results_path}/{i}.jpeg") for i, image in enumerate(images)]

@@ -1,5 +1,3 @@
 .DS_Store
-inputs/*
 outputs/*
 dreambooth_model/*
-class_images/*
