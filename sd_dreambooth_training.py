@@ -238,7 +238,7 @@ args = Namespace(
     learning_rate=5e-06,
     max_train_steps=300,
     save_steps=50,
-    train_batch_size=2, # set to 1 if using prior preservation
+    train_batch_size=1, # set to 1 if using prior preservation
     gradient_accumulation_steps=2,
     max_grad_norm=1.0,
     mixed_precision="fp16", # set to "fp16" for mixed-precision training.
@@ -320,7 +320,7 @@ def training_function(text_encoder, vae, unet):
             pixel_values += [example["class_images"] for example in examples]
 
         pixel_values = torch.stack(pixel_values)
-        pixel_values = pixel_values.to(memory_format=torch.contiguous_format).half()
+        pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
 
         input_ids = tokenizer.pad(
             {"input_ids": input_ids},
@@ -423,7 +423,7 @@ def training_function(text_encoder, vae, unet):
                 else:
                     raise ValueError(f"Unknown prediction type {noise_scheduler.config.prediction_type}")
 
-                if args.with_prior_preservation and False:
+                if args.with_prior_preservation:
                     # Chunk the noise and noise_pred into two parts and compute the loss on each part separately.
                     noise_pred, noise_pred_prior = torch.chunk(noise_pred, 2, dim=0)
                     target, target_prior = torch.chunk(target, 2, dim=0)
