@@ -432,7 +432,7 @@ def training_function(text_encoder, vae, unet):
                     loss = F.mse_loss(noise_pred.float(), target.float(), reduction="none").mean([1, 2, 3]).mean()
 
                     # Compute prior loss
-                    prior_loss = F.mse_loss(noise_pred_prior.float(), target_prior.float(), reduction="mean")
+                    prior_loss = F.mse_loss(noise_pred_prior.half(), target_prior.half(), reduction="mean")
 
                     # Add the prior loss to the instance loss.
                     loss = loss + args.prior_loss_weight * prior_loss
