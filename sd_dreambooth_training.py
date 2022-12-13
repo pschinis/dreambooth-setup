@@ -70,7 +70,7 @@ pretrained_model_name_or_path = "stabilityai/stable-diffusion-2" #@param ["stabi
 #@markdown `instance_prompt` is a prompt that should contain a good description of what your object or style is, together with the initializer word `cat_toy`  
 instance_prompt = "a zwx cat" #@param {type:"string"}
 #@markdown Check the `prior_preservation` option if you would like class of the concept (e.g.: toy, dog, painting) is guaranteed to be preserved. This increases the quality and helps with generalization at the cost of training time
-prior_preservation = False #@param {type:"boolean"}
+prior_preservation = True #@param {type:"boolean"}
 prior_preservation_class_prompt = "a cat" #@param {type:"string"}
 
 num_class_images = 250 
@@ -233,7 +233,7 @@ args = Namespace(
     resolution=vae.sample_size,
     center_crop=True,
     train_text_encoder=True,
-    instance_data_dir=save_path,
+    instance_data_dir='./inputs',
     instance_prompt=instance_prompt,
     learning_rate=5e-06,
     max_train_steps=300,
