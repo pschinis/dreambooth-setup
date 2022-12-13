@@ -320,7 +320,7 @@ def training_function(text_encoder, vae, unet):
             pixel_values += [example["class_images"] for example in examples]
 
         pixel_values = torch.stack(pixel_values)
-        pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
+        pixel_values = pixel_values.to(memory_format=torch.contiguous_format).half()
 
         input_ids = tokenizer.pad(
             {"input_ids": input_ids},
