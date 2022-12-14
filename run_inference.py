@@ -4,6 +4,7 @@ import argparse
 from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler, StableDiffusionPipeline, UNet2DConditionModel
 from diffusers import DPMSolverMultistepScheduler
 import torch
+import gradio as gr
 
 def parse_args(input_args=None):
     parser = argparse.ArgumentParser(description="Simple example of a training script.")
@@ -43,3 +44,18 @@ images = inference(args.prompt,2)
 if not os.path.exists(results_path):
   os.mkdir(results_path)
 [image.save(f"{results_path}/{i}.jpeg") for i, image in enumerate(images)]
+
+with gr.Blocks() as demo:
+    with gr.Row():
+        with gr.Column():
+            prompt = gr.Textbox(label="prompt")
+            samples = gr.Slider(label="Samples",value=1)
+            run = gr.Button(value="Run")
+        with gr.Column():
+            gallery = gr.Gallery(show_label=False)
+
+    run.click(inference, inputs=[prompt,samples], outputs=gallery)
+    gr.Examples([["a photo of sks toy riding a bicycle", 1,1]], [prompt,samples], gallery, inference, cache_examples=False)
+
+
+demo.launch()
