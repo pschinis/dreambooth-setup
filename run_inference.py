@@ -58,4 +58,4 @@ with gr.Blocks() as demo:
     gr.Examples([["a photo of sks toy riding a bicycle", 1,1]], [prompt,samples], gallery, inference, cache_examples=False)
 
 
-demo.launch()
+demo.launch(share=True)
